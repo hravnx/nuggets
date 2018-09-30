@@ -1,6 +1,8 @@
 * Nuggets
 A Racket package of small helpers that for script-like utility programming.
 
+[[[[https://travis-ci.org/hravnx/nuggets.svg?branch=master]]]]
+
 Things like http fetching, regex helpers, stuff like that.
 
 * License
