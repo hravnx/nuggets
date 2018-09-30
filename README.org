@@ -1,3 +1,7 @@
-nuggets
-=======
-README text here.
+* Nuggets
+A Racket package of small helpers that for script-like utility programming.
+
+Things like http fetching, regex helpers, stuff like that.
+
+* License
+MIT, see LICENSE.txt for details
