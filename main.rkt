@@ -1,7 +1,8 @@
 #lang racket/base
 
 (module+ test
-  (require rackunit))
+  (require rackunit)
+  )
 
 ;; Notice
 ;; To install (from within the package directory):
@@ -27,6 +28,7 @@
 ;; Code here
 
 (module+ test
+  (require rackunit)
   ;; Tests to be run with raco test
   )
 

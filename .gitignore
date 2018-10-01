@@ -5,6 +5,8 @@ logs
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+compiled/
+
 # User-specific files
 *.suo
 *.user
