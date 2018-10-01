@@ -1,6 +1,6 @@
 #lang info
 (define collection "nuggets")
-(define deps '("base"))
+(define deps '("base" "threading"))
 (define build-deps '("scribble-lib" "racket-doc" "rackunit-lib"))
 (define scribblings '(("scribblings/nuggets.scrbl" ())))
 (define pkg-desc "Small collection of useful helpers for script-like programming")
