@@ -12,7 +12,16 @@
 (module+ test
   (require rackunit)
 
-  (check-equal? (match-single "abc(.*)abc" "abctestabc") "test")
-  (check-false (match-single "abc(.*)abc" "ab"))
+  (define PATTERN "abc(.*)abc")
+  (define TEXT "abctestabc")
+
+  (check-equal? (match-single PATTERN TEXT '(0 10)) "test")
+  (check-false (match-single PATTERN TEXT '(1 #f)))
+
+  (check-equal? (match-single PATTERN TEXT '(0 . 10)) "test")
+  (check-false (match-single PATTERN TEXT '(1 . #f)))
+
+  (check-equal? (match-single PATTERN TEXT) "test")
+  (check-false (match-single PATTERN "ab"))
 
 )
