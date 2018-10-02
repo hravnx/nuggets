@@ -1,5 +1,5 @@
 * Nuggets
-[[https://travis-ci.org/hravnx/nuggets.svg?branch=master]] https://coveralls.io/github/hravnx/nuggets?branch=master
+[[https://travis-ci.org/hravnx/nuggets.svg?branch=master]] <a href='https://coveralls.io/github/hravnx/nuggets?branch=master'><img src='https://coveralls.io/repos/github/hravnx/nuggets/badge.svg?branch=master' alt='Coverage Status' /></a>
 
 A Racket package of small helpers that for script-like utility programming.
 
