@@ -39,13 +39,17 @@
 (module+ test
   (require rackunit)
 
-  (parameterize ([GET-PROC (λ (u) (open-input-string "Hello world"))])
+  (define (sp s)
+    (λ (u) (open-input-string s)))
+
+  (parameterize ([GET-PROC (sp "Hello world")])
     (check-equal? (fetch "https://google.com") "Hello world"))
 
-  (parameterize ([HEAD-PROC (λ (u) (open-input-string "HTTP/1.1 200 OK"))])
+  (parameterize ([HEAD-PROC (sp "HTTP/1.1 200 OK")])
+    (check-false (dead-link? "https://google.com"))
     (check-equal? (get-headers "https://google.com") "HTTP/1.1 200 OK"))
 
-  (parameterize ([HEAD-PROC (λ (u) (open-input-string "HTTP/1.1 404 Not Found"))])
+  (parameterize ([HEAD-PROC (sp "HTTP/1.1 404 Not Found")])
     (check-true (dead-link? "https://google.com")))
 
   (check-equal? (get-request-result-code "HTTP/1.1 200 OK") 200)
