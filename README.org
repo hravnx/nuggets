@@ -1,6 +1,5 @@
 * Nuggets
-https://travis-ci.org/hravnx/nuggets.svg?branch=master
-#+ATTR_HTML: title="Coverage"
+[[https://travis-ci.org/hravnx/nuggets][https://travis-ci.org/hravnx/nuggets.svg?branch=master]]
 [[https://coveralls.io/github/hravnx/nuggets?branch=master][https://coveralls.io/repos/github/hravnx/buggets/badge.svg?branch=master]]
 A Racket package of small helpers that for script-like utility programming.
 
