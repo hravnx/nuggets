@@ -4,6 +4,7 @@
 
 (require net/url
          threading
+         nuggets/verify-helpers
          nuggets/regex-helpers)
 
 (define GET-PROC (make-parameter get-pure-port))
@@ -18,17 +19,15 @@
 (define (get-headers url)
   (http-request url (HEAD-PROC)))
 
-(define (checked-string->number ctx s)
-  (let ([n (cond [(string? s) (string->number s)]
-                 [else (error (format "Non-string ~s in ~s" s ctx))])])
-    (if n
-        n
-        (error (format "String ~s is not a number in ~s" s ctx)))))
+(define (checked-string->int s)
+  (begin
+    (verify-arg! string? 'checked-string->int s)
+    (verify-val! true? (string->number s) "String ~s is not a number" s)))
 
 (define (get-request-result-code header-text)
   (~>> header-text
        (match-single #px"^HTTP/\\d\\.\\d (\\d+) ")
-       (checked-string->number header-text)))
+       checked-string->int))
 
 (define (dead-link? url)
   (~>> url
@@ -39,24 +38,24 @@
 (module+ test
   (require rackunit)
 
-  (define (sp s)
+  (define (returns s)
     (λ (u) (open-input-string s)))
 
-  (parameterize ([GET-PROC (sp "Hello world")])
+  (parameterize ([GET-PROC (returns "Hello world")])
     (check-equal? (fetch "https://google.com") "Hello world"))
 
-  (parameterize ([HEAD-PROC (sp "HTTP/1.1 200 OK")])
+  (parameterize ([HEAD-PROC (returns "HTTP/1.1 200 OK")])
     (check-false (dead-link? "https://google.com"))
     (check-equal? (get-headers "https://google.com") "HTTP/1.1 200 OK"))
 
-  (parameterize ([HEAD-PROC (sp "HTTP/1.1 404 Not Found")])
+  (parameterize ([HEAD-PROC (returns "HTTP/1.1 404 Not Found")])
     (check-true (dead-link? "https://google.com")))
 
   (check-equal? (get-request-result-code "HTTP/1.1 200 OK") 200)
   (check-equal? (get-request-result-code "HTTP/1.1 404 Not found") 404)
   (check-equal? (get-request-result-code "HTTP/1.1 500 Internal Server Error") 500)
 
-  (check-equal? (checked-string->number "" "42") 42)
-  (check-exn #rx"String \"B\" is not a number in \"A\"" (λ () (checked-string->number "A" "B")))
-  (check-exn #rx"Non-string \\(\\) in \"A\"" (λ () (checked-string->number "A" '())))
-)
+  (check-equal? (checked-string->int "42") 42)
+  (check-exn #rx"checked-string->int: contract violation" (λ () (checked-string->int 42)))
+  (check-exn #rx"String \"x\" is not a number" (λ () (checked-string->int "x")))
+ )
