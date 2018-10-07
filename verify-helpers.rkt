@@ -33,6 +33,9 @@
   (check-false (true? #f))
   (check-true (true? (= 1 1)))
 
+  (check-equal? (lixt-rec 1 '() 2) '(2))
+  (check-equal? (lixt-rec 1 '() _) '(1))
+
   (check-equal? (verify-val! odd? 13 "Number is not odd") 13)
 
   (check-exn #rx"Number is not odd"

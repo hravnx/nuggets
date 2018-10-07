@@ -55,6 +55,10 @@
   (check-equal? (get-request-result-code "HTTP/1.1 404 Not found") 404)
   (check-equal? (get-request-result-code "HTTP/1.1 500 Internal Server Error") 500)
 
+  (check-exn #rx"Hmm" (λ () (verify-val! odd? 12 "Hmm")))
+  (check-exn #rx"Hmm 12" (λ () (verify-val! odd? 12 "Hmm ~s" _)))
+  (check-exn #rx"Hmm 13 12 15" (λ () (verify-val! odd? 12 "Hmm ~s ~s ~s" 13 _ 15)))
+
   (check-equal? (checked-string->int "42") 42)
   (check-exn #rx"checked-string->int: contract violation" (λ () (checked-string->int 42)))
   (check-exn #rx"String \"x\" is not a number" (λ () (checked-string->int "x")))
