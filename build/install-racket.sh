@@ -1,5 +1,5 @@
 URL="https://mirror.racket-lang.org/installers/$racketVs/racket-$racketVs-x86_64-linux.sh"
-INSTALLER=./install-racket.sh
+INSTALLER=./install-racket-binaries.sh
 RACKET_DIR=./racket
 
 echo "Downloading Racket ..."
@@ -15,4 +15,6 @@ no
 EOF
 
 echo "Racket installed"
+ls -la
+
 
