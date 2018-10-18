@@ -15,9 +15,8 @@ echo "Running installer"
 $INSTALLER <<EOF
 no
 "$RACKET_DIR"
+/usr/local
 EOF
-
-export PATH=/app/racket/bin:$PATH
 
 echo "Installing deps"
 raco pkg install --deps search-auto
