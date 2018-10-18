@@ -2,7 +2,7 @@ URL="https://mirror.racket-lang.org/installers/$racketVs/racket-$racketVs-x86_64
 INSTALLER=./install-racket-binaries.sh
 RACKET_DIR=./racket
 
-echo "Downloading Racket ..."
+echo "Downloading Racket ... $URL"
 curl -L -o $INSTALLER $URL
 
 echo "Making racket executable"
