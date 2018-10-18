@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 URL="https://mirror.racket-lang.org/installers/$RACKET_VS/racket-$RACKET_VS-x86_64-linux.sh"
 INSTALLER=./install-racket-binaries.sh
 RACKET_DIR=./racket
@@ -16,9 +17,10 @@ no
 "$RACKET_DIR"
 EOF
 
-echo "Racket installed"
+export PATH=/app/racket/bin:$PATH
 
-raco --version
+echo "Installing deps"
+raco pkg install --deps search-auto
 
 
 
