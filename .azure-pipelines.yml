@@ -11,7 +11,7 @@ pool:
 container: racket_azpipe
 
 steps:
-- script: raco pkg install --deps search-auto
+- script: raco pkg install --auto
   displayName: Installing dependencies
-- script: raco test -x -p nuggets
+- script: raco test -x .
   displayName: Running tests
