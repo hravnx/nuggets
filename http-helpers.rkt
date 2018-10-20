@@ -1,8 +1,9 @@
-#lang racket
+#lang racket/base
 
 (provide fetch dead-link?)
 
 (require net/url
+         racket/port
          threading
          nuggets/verify-helpers
          nuggets/regex-helpers)

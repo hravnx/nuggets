@@ -1,4 +1,6 @@
-#lang racket
+#lang racket/base
+
+(require (for-syntax racket/base))
 
 (provide verify-val!
          verify-arg!
