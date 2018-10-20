@@ -1,0 +1,17 @@
+name: nuggets_$(SourceBranchName)_$(Date:yyyy-MM-dd)$(Rev:.r)
+
+resources:
+  containers:
+  - container: racket_azpipe
+    image: hravnx/racket-azpipe:7.0
+
+pool:
+  vmImage: 'ubuntu-16.04'
+
+container: racket_azpipe
+
+steps:
+- script: raco pkg install --deps search-auto
+  displayName: Installing dependencies
+- script: raco test -x -p nuggets
+  displayName: Running tests
