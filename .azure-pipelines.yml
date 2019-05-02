@@ -15,3 +15,6 @@ steps:
   displayName: Installing dependencies
 - script: raco test -x .
   displayName: Running tests
+- script: |
+        raco pkg install --auto cover coveralls
+        raco cover -b -f coveralls -d ./coverage .
